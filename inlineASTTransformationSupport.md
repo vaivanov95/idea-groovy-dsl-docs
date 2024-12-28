@@ -48,7 +48,9 @@ def result = from(users)
              .orderBy("age")
 ```
 
-This allows developers to write expressive, declarative queries within Groovy. While the GINQ syntax is intuitive, it involves complex AST transformations to align the code with Groovy’s execution model. These transformations are supported in the IDE via the `inlineASTTransformationSupport` extension.
+Although `from`, `select`, and `where` resemble SQL keywords, they are actually valid Groovy method calls. These methods are part of a DSL (Domain-Specific Language) implemented in Groovy, leveraging the language's dynamic capabilities.
+
+GINQ allows developers to write expressive, declarative queries within Groovy. While the syntax is intuitive, it involves complex AST transformations to align the code with Groovy’s execution model. These transformations are supported in the IDE via the `inlineASTTransformationSupport` extension.
 
 ## Key Classes
 
@@ -73,7 +75,7 @@ The performer handles all IDE features for the transformed code. This includes:
 - Type inference
 - Formatting
 
-For example, GINQ queries require support for SQL-like keywords (`from`, `select`, `where`), inferred field types, and custom formatting rules.
+For example, GINQ queries require support for SQL-like constructs (`from`, `select`, `where`), inferred field types, and custom formatting rules.
 
 ## GINQ Inline Transformation Example
 
@@ -109,7 +111,7 @@ The `GinqTransformationPerformer` ensures that IDE features align with the trans
 
 1. **Highlighting**:
 
-   - SQL-like keywords (`select`, `where`) are highlighted appropriately.
+   - SQL-like constructs (`select`, `where`) are highlighted appropriately as Groovy method calls.
 
 2. **Completion**:
 
