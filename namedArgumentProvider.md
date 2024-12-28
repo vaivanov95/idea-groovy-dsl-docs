@@ -1,47 +1,44 @@
-# Groovy Named Argument Provider Extension Point
+# Named Argument Provider Extension Point
 
-The `namedArgumentProvider` extension point allows plugin developers to enhance Groovy method calls by providing named arguments. Named arguments are arguments passed to methods in the form `methodName(arg1: value1, arg2: value2)`. This feature is particularly useful for supporting frameworks or libraries that rely on specific named parameters.
+The `namedArgumentProvider` extension point enables plugin developers to add support for named arguments in Groovy method calls. Named arguments are key-value pairs passed as method arguments, such as `foo(bar: 42)`. This extension point is crucial for enhancing code completion, validation, and navigation in DSLs and APIs that heavily utilize named arguments.
 
 ---
 
 ## Extension Point Declaration
 
 ```xml
-<extensionPoint name="namedArgumentProvider"
-                dynamic="true"
+<extensionPoint name="namedArgumentProvider" 
+                dynamic="true" 
                 interface="org.jetbrains.plugins.groovy.extensions.GroovyNamedArgumentProvider"/>
 ```
 
 ---
 
-## Purpose
+## Purpose and Capabilities
 
-- **Enhanced Code Completion**: Add meaningful named argument suggestions in Groovy DSLs and libraries.
-- **Dynamic Argument Validation**: Provide runtime or compile-time validation for named arguments.
-- **Improved Developer Experience**: Help developers use APIs more effectively by surfacing valid named parameters.
+### **1. Enabling Named Argument Support**
+- **Code Completion**: By implementing this extension point, plugins can provide context-aware completion for named arguments.
+- **Type Validation**: Ensure that the provided named arguments adhere to the expected types.
+- **Navigation and Documentation**: Developers can navigate to the definitions of named arguments and view their associated documentation.
+
+### **2. Context-Sensitive Argument Resolution**
+The extension point allows computing named arguments dynamically, depending on the method or constructor being called. This is particularly useful when a method overload accepts different sets of named arguments.
+
+### **3. Integration with Custom DSLs**
+Many Groovy-based DSLs rely on named arguments for configuration. Examples include:
+- **Gradle Build Scripts**: Configure tasks using named arguments.
+- **SwingBuilder**: Define UI components with property-style named arguments.
 
 ---
 
-## Key Interfaces and Classes
+## Key Interface and Methods
 
-### 1. `GroovyNamedArgumentProvider`
-
-This is the main interface for contributing named arguments to method calls.
+### `GroovyNamedArgumentProvider`
+This abstract class defines methods to compute named arguments for a call or a map literal.
 
 ```java
 public abstract class GroovyNamedArgumentProvider {
 
-  public static final ExtensionPointName<GroovyNamedArgumentProvider> EP_NAME =
-    ExtensionPointName.create("org.intellij.groovy.namedArgumentProvider");
-
-  /**
-   * Computes named arguments for a call.
-   * @param call The method call expression.
-   * @param resolveResult The resolved target method or element.
-   * @param argumentName The name of the argument to be resolved (optional).
-   * @param forCompletion Whether the call is for code completion.
-   * @param result A map to accumulate the results.
-   */
   public void getNamedArguments(@NotNull GrCall call,
                                 @NotNull GroovyResolveResult resolveResult,
                                 @Nullable String argumentName,
@@ -49,32 +46,27 @@ public abstract class GroovyNamedArgumentProvider {
                                 @NotNull Map<String, NamedArgumentDescriptor> result) {
   }
 
-  /**
-   * Provides named arguments for Groovy literal maps.
-   * @param literal The Groovy map literal.
-   * @return A map of argument names to their descriptors.
-   */
   public @NotNull Map<String, NamedArgumentDescriptor> getNamedArguments(@NotNull GrListOrMap literal) {
     return Collections.emptyMap();
   }
 }
 ```
 
-### 2. `NamedArgumentDescriptor`
-
-Represents metadata for a named argument, including its type, navigation target, and documentation.
+#### Key Methods:
+- **`getNamedArguments(GrCall)`**: Computes named arguments for a method call.
+- **`getNamedArguments(GrListOrMap)`**: Computes named arguments for a map literal.
 
 ---
 
-## Example Implementations
+## Example Implementations and Their Capabilities
 
-### 1. **Source Code-Based Named Arguments**
+### **1. Source Code Named Argument Provider**
 
-This implementation provides named arguments based on source code definitions.
+#### Implementation Overview:
+This provider retrieves named arguments defined as parameters or fields in a Groovy class.
 
 ```java
 public final class GroovySourceCodeNamedArgumentProvider extends GroovyNamedArgumentProvider {
-
   @Override
   public void getNamedArguments(@NotNull GrCall call,
                                 @NotNull GroovyResolveResult resolveResult,
@@ -83,45 +75,24 @@ public final class GroovySourceCodeNamedArgumentProvider extends GroovyNamedArgu
                                 @NotNull Map<String, NamedArgumentDescriptor> result) {
     PsiElement resolve = resolveResult.getElement();
     if (resolve instanceof GrMethod) {
-      ((GrMethod)resolve).getNamedParameters().forEach(result::putIfAbsent);
-    } else if (resolve instanceof GrField) {
-      ((GrField)resolve).getNamedParameters().forEach(result::putIfAbsent);
+      ((GrMethod)resolve).getNamedParameters().forEach((key, value) -> result.putIfAbsent(key, value));
     }
   }
 }
 ```
 
-### 2. **Named Variant Arguments**
+#### Capabilities:
+- **Dynamic Resolution**: Dynamically retrieves named arguments defined in method signatures or fields.
+- **Integration with Completion**: Enhances the IDE’s autocompletion capabilities by suggesting named arguments relevant to the method.
+- **Validation**: Ensures that the named arguments are valid for the method being called.
 
-This implementation supports named arguments for annotated methods using `@NamedParams` or similar annotations.
+### **2. SwingBuilder Named Argument Provider**
 
-```kotlin
-class GroovyNamedVariantArgumentProvider : GroovyNamedArgumentProvider() {
-  override fun getNamedArguments(call: GrCall,
-                                 resolveResult: GroovyResolveResult,
-                                 argumentName: String?,
-                                 forCompletion: Boolean,
-                                 result: MutableMap<String, NamedArgumentDescriptor>) {
-    val method = resolveResult.element as? PsiMethod ?: return
-
-    val parameters = method.parameterList.parameters
-    val mapParameter = parameters.firstOrNull() ?: return
-
-    collectNamedParams(mapParameter).forEach {
-      val type = it.type
-      result[it.name] = if (type != null) TypeCondition(type, it.navigationElement) else NamedArgumentDescriptorImpl(it.navigationElement)
-    }
-  }
-}
-```
-
-### 3. **SwingBuilder Support**
-
-This implementation provides named arguments for SwingBuilder DSL.
+#### Implementation Overview:
+This provider adds support for named arguments in SwingBuilder, which uses property-style arguments to configure UI components.
 
 ```java
 public class SwingBuilderNamedArgumentProvider extends GroovyNamedArgumentProvider {
-
   @Override
   public void getNamedArguments(@NotNull GrCall call,
                                 @NotNull GroovyResolveResult resolveResult,
@@ -135,7 +106,7 @@ public class SwingBuilderNamedArgumentProvider extends GroovyNamedArgumentProvid
 
     for (PsiMethod method : aClass.getAllMethods()) {
       String propertyName = GroovyPropertyUtils.getPropertyNameBySetterName(method.getName());
-      if (propertyName != null && (argumentName == null || argumentName.equals(propertyName))) {
+      if (propertyName != null) {
         result.put(propertyName, NamedArgumentDescriptor.SIMPLE_ON_TOP);
       }
     }
@@ -143,32 +114,37 @@ public class SwingBuilderNamedArgumentProvider extends GroovyNamedArgumentProvid
 }
 ```
 
+#### Capabilities:
+- **Domain-Specific Enhancements**: Focuses on the SwingBuilder DSL, enhancing the developer experience for UI definitions.
+- **Optimized for Completion**: Provides quick suggestions for property-based named arguments.
+- **Extends Functionality**: Supports dynamically added event listeners by analyzing method names and parameter types.
+
+### **3. Gradle Named Argument Provider**
+
+#### Discussion:
+The Gradle DSL relies heavily on named arguments to define tasks and configurations. A custom implementation of this extension point can:
+- Suggest task-specific named arguments.
+- Validate argument types against Gradle API specifications.
+- Improve navigation to argument definitions.
+
 ---
 
-## Use Cases
+## Use Cases and Benefits
 
-### 1. DSL Frameworks
-Named arguments are common in DSLs like SwingBuilder, Gant, or Gradle. This extension point helps provide meaningful argument suggestions in such cases.
+### **1. Enhancing DSLs**
+Plugins can leverage this extension point to:
+- Provide better support for custom DSLs built on Groovy.
+- Enhance autocompletion, validation, and navigation for named arguments.
 
-### 2. Enhanced IntelliJ Completion
-Integrating this extension ensures users see only valid named arguments for methods, improving the completion experience.
+### **2. Improved Developer Productivity**
+By dynamically resolving and validating named arguments, the extension point reduces errors and improves the usability of Groovy APIs.
 
-### 3. Validation of Arguments
-Plugin developers can validate named arguments dynamically, catching errors at design time.
-
----
-
-## Registration
-
-To register a `GroovyNamedArgumentProvider`, add the following to your `plugin.xml`:
-
-```xml
-<namedArgumentProvider implementation="com.example.MyNamedArgumentProvider"/>
-```
+### **3. Flexible and Extensible**
+This extension point can adapt to any Groovy-based framework or library, making it a powerful tool for plugin developers targeting Groovy ecosystems.
 
 ---
 
 ## Conclusion
 
-The `namedArgumentProvider` extension point enables plugin developers to enhance the Groovy editing experience by dynamically contributing named arguments. By leveraging this feature, plugins can support domain-specific languages, improve code completion, and validate arguments effectively.
+The `namedArgumentProvider` extension point is a cornerstone for supporting named arguments in Groovy. By enabling dynamic computation and validation of named arguments, it enhances IDE support for Groovy-based DSLs and APIs. From improving code completion to ensuring type safety, this extension point plays a critical role in creating a seamless development experience.
 
