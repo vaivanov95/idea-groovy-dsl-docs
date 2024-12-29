@@ -22,13 +22,41 @@ This repository provides detailed documentation and articles on various extensio
 - [Script Type Detector](./extensionPoints/scriptTypeDetector.md)  
   Identifies and categorizes Groovy scripts based on their content or context.
 
-
-
 ---
 
 ### Syntax
 - [Signature Hint Processor](./extensionPoints/signatureHintProcessor.md)  
   Infers method signatures using annotations or other hints.
+
+### Dynamic Features and Enhancements
+- [Delegates To Provider](./extensionPoints/delegatesToProvider.md)  
+  Defines custom delegate types for closures, enabling dynamic scoping and delegation.
+
+- [PSI Enhancer Category](./extensionPoints/psiEnhancerCategory.md)  
+  Dynamically adds properties and methods to PSI elements in IntelliJ IDEA.
+
+- [Map Content Provider](./extensionPoints/mapContentProvider.md)  
+  Contributes custom content for Groovy map structures.
+
+- [Members Contributor](./extensionPoints/membersContributor.md)  
+  Extends Groovy members with additional logic or properties.
+
+- [Closure Completer](./extensionPoints/closureCompleter.md)  
+  Enables context-aware completion and parameter templates for Groovy closures.
+
+- [Closure Missing Method Contributor](./extensionPoints/closureMissingMethodContributor.md)  
+  Handles and defines custom behavior for missing methods in Groovy closures.
+
+- [GDSL Top Level Provider](./extensionPoints/gdslTopLevelProvider.md)  
+  Adds methods and properties to the top level of Groovy DSLs.
+
+- [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
+  Adds support for named arguments in Groovy method calls.
+
+- [Import Contributor](./extensionPoints/importContributor.md)  
+  Dynamically add imports to Groovy files making IDE treat the file as if imports were added explicitly.
+
+---
 
 ---
 
@@ -91,35 +119,7 @@ This repository provides detailed documentation and articles on various extensio
 
 ---
 
-### Dynamic Features and Enhancements
-- [Delegates To Provider](./extensionPoints/delegatesToProvider.md)  
-  Defines custom delegate types for closures, enabling dynamic scoping and delegation.
 
-- [PSI Enhancer Category](./extensionPoints/psiEnhancerCategory.md)  
-  Dynamically adds properties and methods to PSI elements in IntelliJ IDEA.
-
-- [Map Content Provider](./extensionPoints/mapContentProvider.md)  
-  Contributes custom content for Groovy map structures.
-
-- [Members Contributor](./extensionPoints/membersContributor.md)  
-  Extends Groovy members with additional logic or properties.
-
-- [Closure Completer](./extensionPoints/closureCompleter.md)  
-  Enables context-aware completion and parameter templates for Groovy closures.
-
-- [Closure Missing Method Contributor](./extensionPoints/closureMissingMethodContributor.md)  
-  Handles and defines custom behavior for missing methods in Groovy closures.
-
-- [GDSL Top Level Provider](./extensionPoints/gdslTopLevelProvider.md)  
-  Adds methods and properties to the top level of Groovy DSLs.
-
-- [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
-  Adds support for named arguments in Groovy method calls.
-
-- [Import Contributor](./extensionPoints/importContributor.md)  
-  Provides additional import suggestions to streamline Groovy development.
-
----
 
 ### Other Utilities
 - [Unresolved Highlight Filter](./extensionPoints/unresolvedHighlightFilter.md)  
@@ -157,4 +157,3 @@ This repository provides detailed documentation and articles on various extensio
 
 ---
 
-This version includes all articles from the provided list, properly grouped and with accurate descriptions of their respective extension points.
