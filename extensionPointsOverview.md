@@ -15,24 +15,14 @@ This repository provides detailed documentation and articles on various extensio
 
 ---
 
-### Source files detection and classification
+### Source Files Detection and Classification
 - [Groovy Source Folder Detector](./extensionPoints/groovySourceFolderDetector.md)  
   Detects and marks directories as Groovy source folders in a project.
 
 - [Script Type Detector](./extensionPoints/scriptTypeDetector.md)  
   Identifies and categorizes Groovy scripts based on their content or context.
 
----
 
-### Code Completion and Navigation
-- [Closure Completer](./extensionPoints/closureCompleter.md)  
-  Enables context-aware completion and parameter templates for Groovy closures.
-
-- [GDSL Top Level Provider](./extensionPoints/gdslTopLevelProvider.md)  
-  Adds methods and properties to the top level of Groovy DSLs.
-
-- [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
-  Adds support for named arguments in Groovy method calls.
 
 ---
 
@@ -40,13 +30,15 @@ This repository provides detailed documentation and articles on various extensio
 - [Signature Hint Processor](./extensionPoints/signatureHintProcessor.md)  
   Infers method signatures using annotations or other hints.
 
-- [Closure Missing Method Contributor](./extensionPoints/closureMissingMethodContributor.md)  
-  Handles and defines custom behavior for missing methods in Groovy closures.
+---
 
 ### Types
 
 - [Type Calculator](./extensionPoints/typeCalculator.md)  
   Dynamically calculates types for Groovy expressions.
+
+- [Call Type Calculator](./extensionPoints/callTypeCalculator.md)  
+  Dynamically calculates the return type of method calls.  
 
 - [Type Converter](./extensionPoints/typeConverter.md)  
   Converts between types to support type checking and resolution.
@@ -109,11 +101,32 @@ This repository provides detailed documentation and articles on various extensio
 - [Map Content Provider](./extensionPoints/mapContentProvider.md)  
   Contributes custom content for Groovy map structures.
 
+- [Members Contributor](./extensionPoints/membersContributor.md)  
+  Extends Groovy members with additional logic or properties.
+
+- [Closure Completer](./extensionPoints/closureCompleter.md)  
+  Enables context-aware completion and parameter templates for Groovy closures.
+
+- [Closure Missing Method Contributor](./extensionPoints/closureMissingMethodContributor.md)  
+  Handles and defines custom behavior for missing methods in Groovy closures.
+
+- [GDSL Top Level Provider](./extensionPoints/gdslTopLevelProvider.md)  
+  Adds methods and properties to the top level of Groovy DSLs.
+
+- [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
+  Adds support for named arguments in Groovy method calls.
+
+- [Import Contributor](./extensionPoints/importContributor.md)  
+  Provides additional import suggestions to streamline Groovy development.
+
 ---
 
 ### Other Utilities
 - [Unresolved Highlight Filter](./extensionPoints/unresolvedHighlightFilter.md)  
   Filters unresolved references in Groovy code to reduce false positives.
+
+- [Unresolved Highlight File Filter](./extensionPoints/unresolvedHighlightFileFilter.md)  
+  Suppresses unresolved highlights for specific files or conditions.
 
 - [Groovy Inlay Hint Filter](./extensionPoints/groovyInlayHintFilter.md)  
   Controls the visibility of inlay hints for Groovy code.
@@ -127,6 +140,9 @@ This repository provides detailed documentation and articles on various extensio
 ---
 
 ### Specialized Features
+- [Class Descriptor](./extensionPoints/classDescriptor.md)  
+  Provides additional metadata and descriptors for Groovy classes.
+
 - [Method Descriptor](./extensionPoints/methodDescriptor.md)  
   Provides additional metadata and descriptors for Groovy methods.
 
@@ -139,7 +155,6 @@ This repository provides detailed documentation and articles on various extensio
 - [Groovy Element Filter](./extensionPoints/groovyElementFilter.md)  
   Filters Groovy elements based on specific criteria or contexts.
 
-
-
 ---
 
+This version includes all articles from the provided list, properly grouped and with accurate descriptions of their respective extension points.
