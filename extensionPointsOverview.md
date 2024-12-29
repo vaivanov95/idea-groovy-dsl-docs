@@ -6,129 +6,140 @@ This repository provides detailed documentation and articles on various extensio
 
 ## Files Overview
 
-### General Extensions
+### AST Transformations
 - [AST Transformation Support](./extensionPoints/astTransformationSupport.md)  
-  Discusses support for Groovy AST transformations and how to extend their capabilities.
+  Extends support for Groovy AST transformations, enabling custom processing during compilation.
 
-- [Config Slurper Support](./extensionPoints/configSlurperSupport.md)  
-  Details extending Groovy's `ConfigSlurper` for enhanced configuration capabilities.
+- [Inline AST Transformation Support](./extensionPoints/inlineASTTransformationSupport.md)  
+  Provides debugging and inline transformation capabilities for Groovy scripts.
 
+---
+
+### Source files detection and classification
 - [Groovy Source Folder Detector](./extensionPoints/groovySourceFolderDetector.md)  
-  Explains how to detect and mark Groovy source folders within a project.
+  Detects and marks directories as Groovy source folders in a project.
 
 - [Script Type Detector](./extensionPoints/scriptTypeDetector.md)  
-  Provides information on identifying and categorizing Groovy script types.
+  Identifies and categorizes Groovy scripts based on their content or context.
 
 ---
 
 ### Code Completion and Navigation
 - [Closure Completer](./extensionPoints/closureCompleter.md)  
-  Enhances Groovy closures with context-aware completion and templates.
+  Enables context-aware completion and parameter templates for Groovy closures.
 
 - [GDSL Top Level Provider](./extensionPoints/gdslTopLevelProvider.md)  
-  Introduces methods and properties available at the top level of Groovy DSLs.
-
-- [Expected Types Contributor](./extensionPoints/expectedTypesContributor.md)  
-  Describes how to contribute expected types for better code suggestions.
+  Adds methods and properties to the top level of Groovy DSLs.
 
 - [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
   Adds support for named arguments in Groovy method calls.
 
 ---
 
-### Syntax and Type Handling
+### Syntax
 - [Signature Hint Processor](./extensionPoints/signatureHintProcessor.md)  
-  Explains how to infer method signatures based on annotations.
-
-- [Type Calculator](./extensionPoints/typeCalculator.md)  
-  Details the extension for calculating Groovy expression types dynamically.
-
-- [Type Converter](./extensionPoints/typeConverter.md)  
-  Describes converting between types for enhanced type checking.
-
-- [Reference Type Enhancer](./extensionPoints/referenceTypeEnhancer.md)  
-  Explains enhancing type resolution for Groovy references.
+  Infers method signatures using annotations or other hints.
 
 - [Closure Missing Method Contributor](./extensionPoints/closureMissingMethodContributor.md)  
-  Details handling missing method scenarios in Groovy closures.
+  Handles and defines custom behavior for missing methods in Groovy closures.
+
+### Types
+
+- [Type Calculator](./extensionPoints/typeCalculator.md)  
+  Dynamically calculates types for Groovy expressions.
+
+- [Type Converter](./extensionPoints/typeConverter.md)  
+  Converts between types to support type checking and resolution.
+
+- [Reference Type Enhancer](./extensionPoints/referenceTypeEnhancer.md)  
+  Enhances type resolution for Groovy references.
+
+- [Variable Enhancer](./extensionPoints/variableEnhancer.md)  
+  Adds custom enhancements to variables in Groovy code.
+
+- [Expected Types Contributor](./extensionPoints/expectedTypesContributor.md)  
+  Contributes expected types to improve code completion and suggestions.
 
 ---
 
-### Refactoring and Inspection
-- [Custom Annotation Checker](./extensionPoints/customAnnotationChecker.md)  
-  Implements checks for Groovy annotations to enforce custom rules.
+### Refactoring
+- [Rename Helper](./extensionPoints/renameHelper.md)  
+  Facilitates renaming refactoring operations with custom rules or behaviors.
+
+- [Convert to Java](./extensionPoints/convertToJava.md)  
+  Customizes the conversion of Groovy constructs into Java code.
+
+---
+
+### Inspections
 
 - [Method May Be Static Inspection Filter](./extensionPoints/methodMayBeStaticInspectionFilter.md)  
-  Filters methods that should not be flagged as static candidates.
+  Filters methods that should not be flagged as static candidates during inspections.
 
-- [Rename Helper](./extensionPoints/renameHelper.md)  
-  Provides assistance during renaming refactoring operations.
+- [Custom Annotation Checker](./extensionPoints/customAnnotationChecker.md)  
+  Adds validation for custom annotations in Groovy code.
+
+- [Inspection Disabler](./extensionPoints/inspectionDisabler.md)  
+  Disables specific inspections for Groovy code.
 
 ---
 
-### Debugging and Execution
+### Debugging
 - [Position Manager Delegate](./extensionPoints/positionManagerDelegate.md)  
-  Assists with Groovy code debugging by mapping positions.
-
-- [Inline AST Transformation Support](./extensionPoints/inlineASTTransformationSupport.md)  
-  Supports debugging and inline transformations in Groovy scripts.
+  Maps source code positions to support debugging Groovy files.
 
 ---
 
 ### Gradle and Build Systems
 - [Build System Groovy New Project Wizard](./extensionPoints/buildSystemGroovyNewProjectWizard.md)  
-  Extends the new project wizard for build systems like Gradle.
+  Extends the new project wizard with build system-specific steps like Gradle.
 
 - [Gradle-Specific Extensions](./extensionPoints/groovyFrameworkConfigNotification.md)  
-  Focuses on handling Gradle framework-specific configurations.
+  Provides notifications and checks for Gradle-specific configurations.
 
 ---
 
 ### Dynamic Features and Enhancements
 - [Delegates To Provider](./extensionPoints/delegatesToProvider.md)  
-  Explains adding custom delegate types for closures.
+  Defines custom delegate types for closures, enabling dynamic scoping and delegation.
 
 - [PSI Enhancer Category](./extensionPoints/psiEnhancerCategory.md)  
-  Adds properties and methods to IntelliJ IDEA's PSI elements dynamically.
+  Dynamically adds properties and methods to PSI elements in IntelliJ IDEA.
 
 - [Map Content Provider](./extensionPoints/mapContentProvider.md)  
-  Contributes custom content for Groovy maps.
-
-- [Inspection Disabler](./extensionPoints/inspectionDisabler.md)  
-  Suppresses specific inspections in Groovy code.
+  Contributes custom content for Groovy map structures.
 
 ---
 
 ### Other Utilities
 - [Unresolved Highlight Filter](./extensionPoints/unresolvedHighlightFilter.md)  
-  Filters unresolved references to reduce false positives.
+  Filters unresolved references in Groovy code to reduce false positives.
 
 - [Groovy Inlay Hint Filter](./extensionPoints/groovyInlayHintFilter.md)  
-  Customizes the display of inlay hints in Groovy code.
+  Controls the visibility of inlay hints for Groovy code.
 
-- [Convert to Java](./extensionPoints/convertToJava.md)  
-  Details how to convert Groovy constructs into Java equivalents.
+- [Config Slurper Support](./extensionPoints/configSlurperSupport.md)  
+  Enhances Groovy's `ConfigSlurper` for richer configuration capabilities.
 
 - [Overload Resolver](./extensionPoints/overloadResolver.md)  
-  Helps with resolving overloaded method calls in Groovy.
+  Resolves overloaded method calls based on custom logic.
 
 ---
 
 ### Specialized Features
 - [Method Descriptor](./extensionPoints/methodDescriptor.md)  
-  Describes additional metadata for Groovy methods.
+  Provides additional metadata and descriptors for Groovy methods.
 
 - [Method Comparator](./extensionPoints/methodComparator.MD)  
-  Implements custom logic for method comparison.
+  Implements custom logic for comparing Groovy methods.
 
 - [Expected Package Name Provider](./extensionPoints/expectedPackageNameProvider.md)  
-  Infers expected package names for Groovy files.
+  Infers the expected package name for Groovy files based on context.
 
 - [Groovy Element Filter](./extensionPoints/groovyElementFilter.md)  
-  Filters Groovy elements for specific scenarios.
+  Filters Groovy elements based on specific criteria or contexts.
 
-- [Variable Enhancer](./extensionPoints/variableEnhancer.md)  
-  Adds enhancements to variables in Groovy code.
+
 
 ---
 
