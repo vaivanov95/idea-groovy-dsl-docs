@@ -6,40 +6,15 @@ This repository provides detailed documentation and articles on various extensio
 
 ## Files Overview
 
-### AST Transformations
-- [AST Transformation Support](./extensionPoints/astTransformationSupport.md)  
-  Extends support for Groovy AST transformations, enabling custom processing during compilation.
-
-- [Inline AST Transformation Support](./extensionPoints/inlineASTTransformationSupport.md)  
-  Provides debugging and inline transformation capabilities for Groovy scripts.
-
----
-
-### Source Files Detection and Classification
-- [Groovy Source Folder Detector](./extensionPoints/groovySourceFolderDetector.md)  
-  Detects and marks directories as Groovy source folders in a project.
-
-- [Script Type Detector](./extensionPoints/scriptTypeDetector.md)  
-  Identifies and categorizes Groovy scripts based on their content or context.
-
----
-
-### Syntax
-- [Signature Hint Processor](./extensionPoints/signatureHintProcessor.md)  
-  Infers method signatures using annotations or other hints.
-
 ### Dynamic Features and Enhancements
-- [Delegates To Provider](./extensionPoints/delegatesToProvider.md)  
-  Defines custom delegate types for closures, enabling dynamic scoping and delegation.
-
-- [PSI Enhancer Category](./extensionPoints/psiEnhancerCategory.md)  
-  Dynamically adds properties and methods to PSI elements in IntelliJ IDEA.
-
-- [Map Content Provider](./extensionPoints/mapContentProvider.md)  
-  Contributes custom content for Groovy map structures.
+- [Import Contributor](./extensionPoints/importContributor.md)  
+  Dynamically add imports to Groovy files making IDE treat the file as if imports were added explicitly.
 
 - [Members Contributor](./extensionPoints/membersContributor.md)  
   Extends Groovy members with additional logic or properties.
+
+- [Delegates To Provider](./extensionPoints/delegatesToProvider.md)  
+  Defines custom delegate types for closures, enabling dynamic scoping and delegation.
 
 - [Closure Completer](./extensionPoints/closureCompleter.md)  
   Enables context-aware completion and parameter templates for Groovy closures.
@@ -53,10 +28,14 @@ This repository provides detailed documentation and articles on various extensio
 - [Named Argument Provider](./extensionPoints/namedArgumentProvider.md)  
   Adds support for named arguments in Groovy method calls.
 
-- [Import Contributor](./extensionPoints/importContributor.md)  
-  Dynamically add imports to Groovy files making IDE treat the file as if imports were added explicitly.
+- [Overload Resolver](./extensionPoints/overloadResolver.md)  
+  Resolves overloaded method calls based on custom logic.
 
----
+- [PSI Enhancer Category](./extensionPoints/psiEnhancerCategory.md)  
+  Dynamically adds properties and methods to PSI elements in IntelliJ IDEA.
+
+- [Map Content Provider](./extensionPoints/mapContentProvider.md)  
+  Contributes custom content for Groovy map structures.
 
 ---
 
@@ -66,19 +45,31 @@ This repository provides detailed documentation and articles on various extensio
   Dynamically calculates types for Groovy expressions.
 
 - [Call Type Calculator](./extensionPoints/callTypeCalculator.md)  
-  Dynamically calculates the return type of method calls.  
+  Dynamically calculates the return type of method calls.
+
+- [Signature Hint Processor](./extensionPoints/signatureHintProcessor.md)  
+  Infers method signatures using annotations or other hints.  
 
 - [Type Converter](./extensionPoints/typeConverter.md)  
   Converts between types to support type checking and resolution.
 
-- [Reference Type Enhancer](./extensionPoints/referenceTypeEnhancer.md)  
-  Enhances type resolution for Groovy references.
-
 - [Variable Enhancer](./extensionPoints/variableEnhancer.md)  
   Adds custom enhancements to variables in Groovy code.
 
+- [Reference Type Enhancer](./extensionPoints/referenceTypeEnhancer.md)  
+  Enhances type resolution for Groovy references.
+
 - [Expected Types Contributor](./extensionPoints/expectedTypesContributor.md)  
   Contributes expected types to improve code completion and suggestions.
+
+---
+
+### AST Transformations
+- [AST Transformation Support](./extensionPoints/astTransformationSupport.md)  
+  Extends support for Groovy AST transformations, enabling custom processing during compilation.
+
+- [Inline AST Transformation Support](./extensionPoints/inlineASTTransformationSupport.md)  
+  Provides debugging and inline transformation capabilities for Groovy scripts.
 
 ---
 
@@ -90,6 +81,16 @@ This repository provides detailed documentation and articles on various extensio
   Customizes the conversion of Groovy constructs into Java code.
 
 ---
+
+### Source Files Detection and Classification
+- [Groovy Source Folder Detector](./extensionPoints/groovySourceFolderDetector.md)  
+  Detects and marks directories as Groovy source folders in a project.
+
+- [Script Type Detector](./extensionPoints/scriptTypeDetector.md)  
+  Identifies and categorizes Groovy scripts based on their content or context.
+
+---
+
 
 ### Inspections
 
@@ -120,7 +121,6 @@ This repository provides detailed documentation and articles on various extensio
 ---
 
 
-
 ### Other Utilities
 - [Unresolved Highlight Filter](./extensionPoints/unresolvedHighlightFilter.md)  
   Filters unresolved references in Groovy code to reduce false positives.
@@ -133,9 +133,6 @@ This repository provides detailed documentation and articles on various extensio
 
 - [Config Slurper Support](./extensionPoints/configSlurperSupport.md)  
   Enhances Groovy's `ConfigSlurper` for richer configuration capabilities.
-
-- [Overload Resolver](./extensionPoints/overloadResolver.md)  
-  Resolves overloaded method calls based on custom logic.
 
 ---
 
