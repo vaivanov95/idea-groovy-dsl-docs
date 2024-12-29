@@ -1,6 +1,6 @@
 # Signature Hint Processor Extension Point
 
-The `signatureHintProcessor` extension point in IntelliJ IDEA enables custom logic for inferring method signatures in Groovy-based development. This allows plugin developers to dynamically determine expected method parameter types and structures based on annotations and method metadata. Such capabilities are especially valuable when working with type inference in dynamic languages like Groovy.
+The `signatureHintProcessor` extension point in IntelliJ IDEA enables custom logic for inferring method signatures. This allows plugin developers to dynamically determine expected method parameter types and structures based on annotations and method metadata.
 
 ---
 
